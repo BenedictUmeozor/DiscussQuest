@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Logout from "./pages/Logout";
 import Index from "./pages/Index";
 import QuestionPage from "./pages/QuestionPage";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -17,13 +18,17 @@ const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "/logout",
+        path: "logout",
         element: <Logout />,
       },
+      {
+        path: 'profile',
+        element: <Profile />
+      }
     ],
   },
   {
-    path: "/",
+    path: "/guest",
     element: <GuestLayout />,
     children: [
       {
@@ -31,11 +36,11 @@ const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/signup",
+        path: "signup",
         element: <Signup />,
       },
     ],

@@ -13,7 +13,6 @@ import {
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import axiosClient from "../axiosClient";
 
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
@@ -25,7 +24,10 @@ const Header = () => {
       <header className="py-5 main-header">
         <div className="center flex items-center justify-between">
           {/* logo */}
-          <Link to="/" className="flex items-center gap-2 flex-item-1">
+          <Link
+            to={token ? "/" : "/guest"}
+            className="flex items-center gap-2 flex-item-1"
+          >
             <MagnifyingGlassIcon width={30} color="#f56565" />
             <h1 className="font-bold text-2xl text-red-500">DiscussQuest</h1>
           </Link>
@@ -81,14 +83,14 @@ const Header = () => {
             {!token && (
               <>
                 <NavLink
-                  to="/login"
+                  to="/guest/login"
                   className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
                 >
                   <CursorArrowRaysIcon width={20} />
                   <span>Login</span>
                 </NavLink>
                 <NavLink
-                  to="/signup"
+                  to="/guest/signup"
                   className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
                 >
                   <ArrowLeftOnRectangleIcon width={20} />
@@ -186,7 +188,7 @@ const Header = () => {
                       {" "}
                       <li>
                         <NavLink
-                          to="/login"
+                          to="/guest/login"
                           className="text-gray-900 transition-all duration-150 ease-out hover:text-red-500"
                           onClick={() => setShowNav(false)}
                         >
@@ -195,7 +197,7 @@ const Header = () => {
                       </li>
                       <li>
                         <NavLink
-                          to="/signup"
+                          to="/guest/signup"
                           className="text-gray-900 transition-all duration-150 ease-out hover:text-red-500"
                           onClick={() => setShowNav(false)}
                         >

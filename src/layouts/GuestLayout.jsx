@@ -16,6 +16,11 @@ export default function GuestLayout() {
       <section>
         <Outlet />
       </section>
+      <footer className="py-4">
+        <div className="center">
+          <p className="text-center">&copy; Copyright {(new Date()).getFullYear()} Benedict</p>
+        </div>
+      </footer>
     </main>
   );
 }

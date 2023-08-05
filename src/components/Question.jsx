@@ -2,6 +2,7 @@ import { ChatBubbleLeftIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import manImage from "../assets/man.png";
 import womanImage from "../assets/woman.png";
+import lightFormat  from "date-fns/lightFormat";
 
 const Question = ({ question }) => {
   return (
@@ -17,6 +18,7 @@ const Question = ({ question }) => {
       <h4 className="uppercase tracking-wider mb-2 font-semibold text-red-500">
         {question.category.name}
       </h4>
+      <span className="text-xs inline-block text-gray-700">{lightFormat (new Date(question.created_at), 'yyyy-MM-dd h:m a')}</span>
       <div>
         <Link to={"/question/" + question.id}>
           <h3 className="font-semibold mb-3 text-lg">{question.title}</h3>

@@ -8,7 +8,7 @@ export default function AuthLayout() {
   const { token, setUser } = useAuthContext();
 
   if (!token) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/guest"} />;
   }
   
   return (
@@ -17,6 +17,11 @@ export default function AuthLayout() {
       <section>
         <Outlet />
       </section>
+      <footer className="py-4">
+        <div className="center">
+          <p className="text-center">&copy; Copyright {(new Date()).getFullYear()} Benedict</p>
+        </div>
+      </footer>
     </main>
   );
 }

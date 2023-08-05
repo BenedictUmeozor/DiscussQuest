@@ -1,18 +1,33 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useRef, useState } from "react";
+import axiosClient from "../axiosClient";
 
-const AnswerForm = ({ id, onShow }) => {
+const AnswerForm = ({ id, onShow, onAnswer }) => {
   const textareaRef = useRef();
-  const idRef = useRef();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErrors(null);
     const payload = {
-      questionId: id,
+      question_id: id,
       body: textareaRef.current.value,
     };
-    console.log(payload);
+
+    try {
+      const { data } = await axiosClient.post("/answers", payload);
+      setLoading(false);
+      onAnswer();
+      onShow();
+    } catch (error) {
+      const response = error.response;
+      if (response && response.status === 422) {
+        setErrors(response.data.errors);
+      }
+      setLoading(false);
+    }
   };
 
   return (
@@ -30,9 +45,13 @@ const AnswerForm = ({ id, onShow }) => {
           <input type="hidden" value={id} />
           <textarea
             ref={textareaRef}
+            placeholder="Answer this question"
             className="block w-full my-2 bg-gray-100 px-3 py-2 focus: outline-none border border-gray-300 focus:border-red-300 rounded appearance-none"
             rows="8"
           ></textarea>
+          {errors && errors["body"] && (
+            <p className="text-xs text-red-500">{errors["body"][0]}</p>
+          )}
           <button
             disabled={loading}
             className="mt-4 bg-red-400 border-2 border-transparent rounded text-white px-4 py-2 transition-all duration-200 ease-in-out hover:bg-red-700"

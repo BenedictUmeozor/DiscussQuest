@@ -13,15 +13,10 @@ export default function Index() {
     try {
       const { data } = await axiosClient.get("/questions");
       setQuestions(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const likeQuestion = async () => {
-
-  }
 
   useEffect(() => {
     getQuestions();
@@ -29,13 +24,8 @@ export default function Index() {
 
   return (
     <section className="center">
-      <div className="lg:grid lg:grid-cols-3 lg:gap-2">
-        <div className="max-lg:hidden col-span-1 ">
-          <div className="bg-white rounded shadow">
-            <h2>User</h2>
-          </div>
-        </div>
-        <div className="col-span-2">
+      <div className="max-w-3xl mx-auto mt-6">
+        <div>
           {token && <QuestionBox onHide={getQuestions} />}
           <div className="my-5">
             <h2 className="font-semibold text-xl">Recent Questions</h2>
@@ -54,7 +44,6 @@ export default function Index() {
             )}
           </div>
         </div>
-
       </div>
     </section>
   );
