@@ -1,10 +1,9 @@
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import QuestionModal from "./QuestionModal";
-import manImage from "../assets/man.png";
-import womanImage from "../assets/woman.png";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
 import axiosClient from "../axiosClient";
+import Avatar from "./Avatar";
 
 const QuestionBox = ({ onHide }) => {
   const { setUser, user } = useAuthContext();
@@ -17,13 +16,9 @@ const QuestionBox = ({ onHide }) => {
       )}
 
       {/* question box */}
-      <div className="bg-white rounded shadow p-4 flex items-center gap-2">
-        <div className="w-1/6 overflow- flex items-center justify-center">
-          <img
-            src={user?.gender === "male" ? manImage : womanImage}
-            alt="user"
-            className=" w-10 rounded-full border border-red-500"
-          />
+      <div className="bg-white rounded shadow p-4 flex items-center">
+        <div className="w-1/6 flex items-center justify-center">
+          <Avatar name={user.name} />
         </div>
         <div className="w-5/6">
           <div

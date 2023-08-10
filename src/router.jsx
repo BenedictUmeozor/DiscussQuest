@@ -7,6 +7,8 @@ import Logout from "./pages/Logout";
 import Index from "./pages/Index";
 import QuestionPage from "./pages/QuestionPage";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -22,9 +24,13 @@ const router = createBrowserRouter([
         element: <Logout />,
       },
       {
-        path: 'profile',
-        element: <Profile />
-      }
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "edit-profile",
+        element: <EditProfile />,
+      },
     ],
   },
   {
@@ -49,6 +55,10 @@ const router = createBrowserRouter([
     path: "/question/:id",
     element: <QuestionPage />,
   },
+  {
+    path: "*",
+    element: <ErrorPage />
+  }
 ]);
 
 export default router;

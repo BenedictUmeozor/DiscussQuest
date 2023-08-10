@@ -43,6 +43,8 @@ export default function Signup() {
       const { response } = error;
       if (response && response.status === 422) {
         setErrors(response.data.errors);
+      } else {
+        alert("We could not log you in at this time")
       }
       setLoading(false);
     }
@@ -113,7 +115,7 @@ export default function Signup() {
             {errors && <p className="text-xs mt-2 text-center text-red-500">Check errors and try again</p>}
           </div>
           <p className="text mt-4">
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/guest/login">Login</Link>
           </p>
         </form>
       </div>

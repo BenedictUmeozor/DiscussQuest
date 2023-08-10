@@ -8,6 +8,7 @@ import Answer from "../components/Answer";
 import { useAuthContext } from "../contexts/AuthContext";
 import AnswerForm from "../components/AnswerForm";
 import lightFormat from "date-fns/lightFormat";
+import Avatar from "../components/Avatar";
 
 export default function QuestionPage() {
   const [question, setQuestion] = useState(null);
@@ -65,11 +66,7 @@ export default function QuestionPage() {
         {question ? (
           <div className="mt-4">
             <div className="flex items-center gap-3 mb-4">
-              <img
-                className=" w-10 rounded-full border border-red-500"
-                src={question.user?.gender === "male" ? manImage : womanImage}
-                alt="User"
-              />
+              <Avatar name={question.user.name} />
               <p className="capitalize ">{question.user.name}</p>
             </div>
             <span className="text-xs inline-block text-gray-700">

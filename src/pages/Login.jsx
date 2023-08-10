@@ -98,7 +98,7 @@ export default function Login() {
             )}
           </div>
           <p className="text mt-4">
-            Don't have an account? <Link to="/signup">Signup</Link>
+            Don't have an account? <Link to="/guest/signup">Signup</Link>
           </p>
         </form>
       </div>

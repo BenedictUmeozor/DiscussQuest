@@ -3,7 +3,7 @@ import manImage from "../assets/man.png";
 import womanImage from "../assets/woman.png";
 import axiosClient from "../axiosClient";
 import UserQuestion from "../components/UserQuestion";
-import UserForm from "../components/UserForm";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -29,7 +29,6 @@ export default function Profile() {
       {!user && <p className="mt-4">Loading...</p>}
       {user && (
         <>
-          <UserForm user={user} />
           <div className="grid lg:grid-cols-2 gap-4">
             <div>
               <h2 className="text-xl mb-4 font-bold text-gray-900">
@@ -61,9 +60,9 @@ export default function Profile() {
                   <h5 className="text-lg font-semibold">Email</h5>
                   <p>{user.email}</p>
                 </div>
-                <button className="py-1 px-3 text-white bg-red-500 rounded transition-all duration-200 hover:bg-red-700">
+                <Link to='/edit-profile' className="py-1 px-3 text-white bg-red-500 rounded transition-all duration-200 hover:bg-red-700">
                   Edit
-                </button>
+                </Link>
               </div>
             </div>
             <div>
