@@ -2,16 +2,22 @@ import { useEffect, useState } from "react";
 import manImage from "../assets/man.png";
 import womanImage from "../assets/woman.png";
 import axiosClient from "../axiosClient";
-import UserQuestion from "../components/UserQuestion";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import UserProfileQuestion from "../components/UserProfileQuestion";
+import { useAuthContext } from "../contexts/AuthContext";
 
-export default function Profile() {
+export default function UserProfile() {
+  const { id } = useParams();
+  const { user: loggedUser } = useAuthContext();
+
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(null);
   const [questions, setQuestions] = useState(null);
 
   const fetchUser = async () => {
     try {
-      const { data } = await axiosClient.get("/users");
+      const { data } = await axiosClient.get("/profile/" + id);
       setUser(data.user);
       setQuestions(data.questions);
     } catch (error) {
@@ -20,8 +26,13 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    if (loggedUser && id) {
+      if (loggedUser.id == id) {
+        return navigate('/profile');
+      }
+    }
     fetchUser();
-  }, []);
+  }, [loggedUser, id]);
 
   return (
     <div className="max-w-3xl mx-auto px-2">
@@ -31,7 +42,7 @@ export default function Profile() {
           <div className="grid lg:grid-cols-2 gap-4">
             <div>
               <h2 className="text-xl mb-4 font-bold text-gray-900">
-                My Profile
+                Profile for {user.name}
               </h2>
               <div className=" rounded-full w-32 border-2 border-red-400 overflow-hidden">
                 <img
@@ -48,36 +59,25 @@ export default function Profile() {
                 <div className="mb-3">
                   <h5 className="text-lg font-semibold">Bio</h5>
                   <p className="text-gray-800">
-                    {user.bio ? user.bio : "You have not added a bio"}
+                    {user.bio ? user.bio : "Hi! I'm using DiscussQuest!"}
                   </p>
                 </div>
                 <div className="mb-3">
                   <h5 className="text-lg font-semibold">Gender</h5>
                   <p className="capitalize">{user.gender}</p>
                 </div>
-                <div className="mb-3">
-                  <h5 className="text-lg font-semibold">Email</h5>
-                  <p>{user.email}</p>
-                </div>
-                <Link
-                  to="/edit-profile"
-                  className="py-1 px-3 text-white bg-red-500 rounded transition-all duration-200 hover:bg-red-700"
-                >
-                  Edit
-                </Link>
               </div>
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-900">Questions</h2>
               <div>
                 {!questions && <p className="mt-4">Loading...</p>}
-                {questions && (
+                {questions && questions.length > 0 && (
                   <div>
                     {questions.map((question) => (
-                      <UserQuestion
+                      <UserProfileQuestion
                         key={question.id}
                         question={question}
-                        onDelete={fetchUser}
                       />
                     ))}
                   </div>

@@ -1,4 +1,4 @@
-import { ChatBubbleLeftIcon, HeartIcon } from "@heroicons/react/24/solid";
+import { ChatBubbleLeftIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import lightFormat from "date-fns/lightFormat";
 import Avatar from "./Avatar";
@@ -8,7 +8,9 @@ const Question = ({ question }) => {
     <div className="p-4 bg-white rounded-lg shadow-lg">
       <div className="flex items-center gap-3 mb-4">
         <Avatar name={question.user.name} />
-        <p className="capitalize ">{question.user.name}</p>
+        <Link to={"/profile/" + question.user.id} className="hover:underline">
+          <p className="capitalize">{question.user.name}</p>
+        </Link>
       </div>
       <h4 className="uppercase tracking-wider mb-2 font-semibold text-red-500">
         {question.category.name}

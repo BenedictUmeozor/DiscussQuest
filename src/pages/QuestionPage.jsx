@@ -2,8 +2,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../axiosClient";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import manImage from "../assets/man.png";
-import womanImage from "../assets/woman.png";
 import Answer from "../components/Answer";
 import { useAuthContext } from "../contexts/AuthContext";
 import AnswerForm from "../components/AnswerForm";
@@ -67,7 +65,12 @@ export default function QuestionPage() {
           <div className="mt-4">
             <div className="flex items-center gap-3 mb-4">
               <Avatar name={question.user.name} />
-              <p className="capitalize ">{question.user.name}</p>
+              <Link
+                to={"/profile/" + question.user.id}
+                className="hover:underline"
+              >
+                <p className="capitalize ">{question.user.name}</p>
+              </Link>
             </div>
             <span className="text-xs inline-block text-gray-700">
               {lightFormat(new Date(question.created_at), "yyyy-MM-dd h:m a")}

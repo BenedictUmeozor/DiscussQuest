@@ -16,7 +16,7 @@ const QuestionBox = ({ onHide }) => {
       )}
 
       {/* question box */}
-      <div className="bg-white rounded shadow p-4 flex items-center">
+      {user && <div className="bg-white rounded shadow p-4 flex items-center">
         <div className="w-1/6 flex items-center justify-center">
           <Avatar name={user.name} />
         </div>
@@ -29,7 +29,7 @@ const QuestionBox = ({ onHide }) => {
             <QuestionMarkCircleIcon width={18} className="opacity-75" />
           </div>
         </div>
-      </div>
+      </div>}
       {/* Question box end */}
     </>
   );
