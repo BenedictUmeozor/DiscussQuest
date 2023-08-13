@@ -7,6 +7,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import AnswerForm from "../components/AnswerForm";
 import lightFormat from "date-fns/lightFormat";
 import Avatar from "../components/Avatar";
+import { AnswersLoader, QuestionLoader } from "../components/SkeletonLoader";
 
 export default function QuestionPage() {
   const [question, setQuestion] = useState(null);
@@ -81,7 +82,7 @@ export default function QuestionPage() {
             </div>
           </div>
         ) : (
-          <p className="mt-4">Loading...</p>
+          <QuestionLoader />
         )}
         {/* answers  */}
         <div>
@@ -106,7 +107,7 @@ export default function QuestionPage() {
               <p className="mt-4">No answers to this question yet.</p>
             )
           ) : (
-            <p className="mt-4">Loading...</p>
+            <AnswersLoader />
           )}
           {answers && (
             <button

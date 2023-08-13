@@ -16,7 +16,7 @@ export default function Logout() {
         setUser({});
         _setToken(null);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => alert("We could not log you out at this time"))
       .finally(() => {
         setLoading(false);
       });

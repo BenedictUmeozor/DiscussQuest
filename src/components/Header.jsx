@@ -42,7 +42,7 @@ const Header = () => {
                 <span>Categories</span>
               </NavLink>
               <NavLink
-                to="/questions"
+                to={token ? "/questions" : "/guest/questions"}
                 className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
               >
                 <QuestionMarkCircleIcon width={20} />
@@ -145,7 +145,7 @@ const Header = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/questions"
+                      to={token ? "/questions" : "/guest/questions"}
                       className="text-gray-900 transition-all duration-150 ease-out hover:text-red-500"
                       onClick={() => setShowNav(false)}
                     >

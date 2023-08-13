@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import ErrorPage from "./pages/ErrorPage";
 import UserProfile from "./pages/UserProfile";
+import Questions from "./pages/Questions";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "profile/:id",
-        element: <UserProfile />
+        element: <UserProfile />,
+      },
+      {
+        path: "questions",
+        element: <Questions />,
       },
     ],
   },
@@ -53,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "questions",
+        element: <Questions />,
       },
     ],
   },

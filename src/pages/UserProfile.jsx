@@ -5,6 +5,7 @@ import axiosClient from "../axiosClient";
 import { useNavigate, useParams } from "react-router-dom";
 import UserProfileQuestion from "../components/UserProfileQuestion";
 import { useAuthContext } from "../contexts/AuthContext";
+import { ProfileLoader } from "../components/SkeletonLoader";
 
 export default function UserProfile() {
   const { id } = useParams();
@@ -28,15 +29,15 @@ export default function UserProfile() {
   useEffect(() => {
     if (loggedUser && id) {
       if (loggedUser.id == id) {
-        return navigate('/profile');
+        return navigate("/profile");
       }
     }
     fetchUser();
   }, [loggedUser, id]);
 
   return (
-    <div className="max-w-3xl mx-auto px-2">
-      {!user && <p className="mt-4">Loading...</p>}
+    <div className="max-w-3xl mx-auto px-2 py-4">
+      {!user && <ProfileLoader />}
       {user && (
         <>
           <div className="grid lg:grid-cols-2 gap-4">

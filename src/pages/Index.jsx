@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import axiosClient from "../axiosClient";
 import Question from "../components/Question";
 import QuestionBox from "../components/QuestionBox";
+import { IndexLoader } from "../components/SkeletonLoader";
+import { Link } from "react-router-dom";
+import Error from "../components/Error";
 
 export default function Index() {
   const { token } = useAuthContext();
@@ -33,21 +36,30 @@ export default function Index() {
             <div className="my-5">
               <h2 className="font-semibold text-xl">Recent Questions</h2>
               {questions ? (
-                <div className="my-6 grid md:grid-cols-2 gap-5">
-                  {questions.length > 0 ? (
-                    questions.map((question) => (
-                      <Question key={question.id} question={question} />
-                    ))
-                  ) : (
-                    <p>No questions has been posted yet</p>
-                  )}
-                </div>
+                <>
+                  <div className="my-6 grid md:grid-cols-2 gap-5">
+                    {questions.length > 0 ? (
+                      questions.map((question) => (
+                        <Question key={question.id} question={question} />
+                      ))
+                    ) : (
+                      <p>No questions has been posted yet</p>
+                    )}
+                  </div>
+                  <div className="mt-5">
+                    <Link to={token ? "/questions" : "/guest/questions"}>
+                      See more
+                    </Link>
+                  </div>
+                </>
               ) : (
-                <p className="mt-4">Loading...</p>
+                <IndexLoader />
               )}
             </div>
           )}
-          {error && <div className="text-center my-6">Something went wrong</div>}
+          {error && (
+            <Error />
+          )}
         </div>
       </div>
     </section>
