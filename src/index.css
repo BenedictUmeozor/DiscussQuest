@@ -41,7 +41,7 @@ button:disabled {
   height: 100vh;
   transition: all 0.5s ease-in-out;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 20;
 }
 
 .navbar .close-btn {
@@ -81,7 +81,7 @@ button:disabled {
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 5;
+  z-index: 15;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -147,6 +147,16 @@ button:disabled {
 .form p.text a {
   color: #f56565;
   text-decoration: underline;
+}
+
+.answer-action {
+  transform-origin: top right;
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.answer-action.active {
+  transform: scale(1);
 }
 
 .center {
