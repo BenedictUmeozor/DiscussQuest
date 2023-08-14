@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IndexLoader } from "../components/SkeletonLoader";
 import axiosClient from "../axiosClient";
 import Question from "../components/Question";
+import Error from "../components/Error";
 
 const Questions = () => {
   const [questions, setQuestions] = useState(null);
@@ -43,9 +44,7 @@ const Questions = () => {
               )}
             </div>
           )}
-          {error && (
-            <div className="text-center my-6">Something went wrong</div>
-          )}
+          {error && <Error />}
         </div>
       </div>
     </section>

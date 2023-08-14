@@ -5,6 +5,7 @@ import axiosClient from "../axiosClient";
 import UserQuestion from "../components/UserQuestion";
 import { Link } from "react-router-dom";
 import { ProfileLoader } from "../components/SkeletonLoader";
+import Error from "../components/Error";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -12,13 +13,13 @@ export default function Profile() {
   const [error, setError] = useState(false);
 
   const fetchUser = async () => {
-    setError(false)
+    setError(false);
     try {
       const { data } = await axiosClient.get("/users");
       setUser(data.user);
       setQuestions(data.questions);
     } catch (error) {
-      setError(true)
+      setError(true);
     }
   };
 
@@ -28,8 +29,9 @@ export default function Profile() {
 
   return (
     <div className="max-w-3xl mx-auto px-2">
-      {!user && <ProfileLoader />}
-      {user && (
+      {error ? (
+        <Error />
+      ) : user ? (
         <>
           <div className="grid lg:grid-cols-2 gap-4">
             <div>
@@ -89,6 +91,8 @@ export default function Profile() {
             </div>
           </div>
         </>
+      ) : (
+        <ProfileLoader />
       )}
     </div>
   );

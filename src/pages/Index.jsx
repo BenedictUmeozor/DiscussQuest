@@ -46,7 +46,7 @@ export default function Index() {
                       <p>No questions has been posted yet</p>
                     )}
                   </div>
-                  <div className="mt-5">
+                  <div className="mt-5 text-center text-red-500 hover:underline">
                     <Link to={token ? "/questions" : "/guest/questions"}>
                       See more
                     </Link>

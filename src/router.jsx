@@ -1,16 +1,25 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import {
+  EditProfileLoader,
+  IndexLoader,
+  ProfileLoader,
+  QuestionLoader,
+} from "./components/SkeletonLoader";
+
 import AuthLayout from "./layouts/AuthLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Logout from "./pages/Logout";
-import Index from "./pages/Index";
-import QuestionPage from "./pages/QuestionPage";
-import Profile from "./pages/Profile";
-import EditProfile from "./pages/EditProfile";
 import ErrorPage from "./pages/ErrorPage";
-import UserProfile from "./pages/UserProfile";
-import Questions from "./pages/Questions";
+
+const Index = lazy(() => import("./pages/Index"));
+const Questions = lazy(() => import("./pages/Questions"));
+const UserProfile = lazy(() => import("./pages/UserProfile"));
+const Profile = lazy(() => import("./pages/Profile"));
+const EditProfile = lazy(() => import("./pages/EditProfile"));
+const QuestionPage = lazy(() => import("./pages/QuestionPage"));
 
 const router = createBrowserRouter([
   {
@@ -18,7 +27,11 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        element: <Index />,
+        element: (
+          <Suspense fallback={<IndexLoader />}>
+            <Index />
+          </Suspense>
+        ),
         index: true,
       },
       {
@@ -27,19 +40,35 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <Suspense fallback={<ProfileLoader />}>
+            <Profile />
+          </Suspense>
+        ),
       },
       {
         path: "edit-profile",
-        element: <EditProfile />,
+        element: (
+          <Suspense fallback={<EditProfileLoader />}>
+            <EditProfile />
+          </Suspense>
+        ),
       },
       {
         path: "profile/:id",
-        element: <UserProfile />,
+        element: (
+          <Suspense fallback={<ProfileLoader />}>
+            <UserProfile />
+          </Suspense>
+        ),
       },
       {
         path: "questions",
-        element: <Questions />,
+        element: (
+          <Suspense fallback={<IndexLoader />}>
+            <Questions />
+          </Suspense>
+        ),
       },
     ],
   },
@@ -48,7 +77,11 @@ const router = createBrowserRouter([
     element: <GuestLayout />,
     children: [
       {
-        element: <Index />,
+        element: (
+          <Suspense fallback={<IndexLoader />}>
+            <Index />
+          </Suspense>
+        ),
         index: true,
       },
       {
@@ -67,7 +100,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/question/:id",
-    element: <QuestionPage />,
+    element: (
+      <Suspense fallback={<QuestionLoader />}>
+        <QuestionPage />
+      </Suspense>
+    ),
   },
   {
     path: "*",
