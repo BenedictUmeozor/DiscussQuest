@@ -100,7 +100,11 @@ export default function QuestionPage() {
             answers.length > 0 ? (
               <div className="my-6 grid md:grid-cols-2 gap-5">
                 {answers.map((answer) => (
-                  <Answer key={answer.id} answer={answer} />
+                  <Answer
+                    key={answer.id}
+                    answer={answer}
+                    action={fetchAnswers}
+                  />
                 ))}
               </div>
             ) : (

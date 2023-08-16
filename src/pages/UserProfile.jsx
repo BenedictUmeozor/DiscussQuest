@@ -83,6 +83,7 @@ export default function UserProfile() {
                     ))}
                   </div>
                 )}
+                {questions && questions.length === 0 && <div className="mt-2 text-gray-700">{user.name} has no questions yet</div>}
               </div>
             </div>
           </div>

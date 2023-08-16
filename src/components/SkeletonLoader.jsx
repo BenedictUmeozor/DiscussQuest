@@ -1,6 +1,31 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+export function CategoryLoader() {
+  return (
+    <div className="my-6">
+      <div className="mb-3">
+        <Skeleton count={1} width={"100%"} height={100} />
+      </div>
+      <div className="mb-3">
+        <Skeleton count={1} width={"100%"} height={100} />
+      </div>
+      <div className="mb-3">
+        <Skeleton count={1} width={"100%"} height={100} />
+      </div>
+      <div className="mb-3">
+        <Skeleton count={1} width={"100%"} height={100} />
+      </div>
+      <div className="mb-3">
+        <Skeleton count={1} width={"100%"} height={100} />
+      </div>
+      <div className="mb-3">
+        <Skeleton count={1} width={"100%"} height={100} />
+      </div>
+    </div>
+  );
+}
+
 export function EditProfileLoader() {
   return (
     <div>

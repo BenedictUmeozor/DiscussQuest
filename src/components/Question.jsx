@@ -9,12 +9,22 @@ const Question = ({ question }) => {
       <div className="flex items-center gap-3 mb-4">
         <Avatar name={question.user.name} />
         <Link to={"/profile/" + question.user.id} className="hover:underline">
-          <p className="capitalize">{question.user.name}</p>
+          <p
+            className="capitalize"
+            style={{ fontSize: "1.1rem", fontWeight: "450" }}
+          >
+            {question.user.name}
+          </p>
         </Link>
       </div>
-      <h4 className="uppercase tracking-wider mb-2 font-semibold text-red-500">
-        {question.category.name}
-      </h4>
+      <Link
+        className="hover:underline text-red-500"
+        to={`/categories/${question.category.id}/${question.category.name}`}
+      >
+        <h4 className="uppercase tracking-wider mb-2 font-semibold text-red-500">
+          {question.category.name}
+        </h4>
+      </Link>
       <span className="text-xs inline-block text-gray-700">
         {lightFormat(new Date(question.created_at), "yyyy-MM-dd h:m a")}
       </span>

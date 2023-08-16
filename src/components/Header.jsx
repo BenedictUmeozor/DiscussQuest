@@ -48,13 +48,6 @@ const Header = () => {
                 <QuestionMarkCircleIcon width={20} />
                 <span>Questions</span>
               </NavLink>
-              <NavLink
-                to="/popular"
-                className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
-              >
-                <FireIcon width={20} />
-                <span>Popular</span>
-              </NavLink>
               {token && (
                 <NavLink
                   to="/profile"
@@ -64,50 +57,35 @@ const Header = () => {
                   <span>Profile</span>
                 </NavLink>
               )}
+              {!token && (
+                <>
+                  <NavLink
+                    to="/guest/login"
+                    className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
+                  >
+                    <CursorArrowRaysIcon width={20} />
+                    <span>Login</span>
+                  </NavLink>
+                  <NavLink
+                    to="/guest/signup"
+                    className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
+                  >
+                    <ArrowLeftOnRectangleIcon width={20} />
+                    <span>Signup</span>
+                  </NavLink>
+                </>
+              )}
+              {token && (
+                <NavLink
+                  to="/logout"
+                  className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
+                >
+                  <ArrowRightOnRectangleIcon width={20} />
+                  <span>Logout</span>
+                </NavLink>
+              )}
             </div>
           </nav>
-
-          <div className="hidden relative md:block flex-item-2">
-            <input
-              type="text"
-              placeholder="Search a question..."
-              className="block w-full py-2 ps-2 pr-7 bg-gray-50 appearance-none border-2 rounded border-gray-300 focus:outline-none focus:border-red-400 text-xs"
-            />
-            <MagnifyingGlassIcon
-              width={20}
-              className="absolute top-1/2 right-2 transform -translate-y-1/2"
-            />
-          </div>
-
-          <div className="hidden md:flex items-center gap-2">
-            {!token && (
-              <>
-                <NavLink
-                  to="/guest/login"
-                  className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
-                >
-                  <CursorArrowRaysIcon width={20} />
-                  <span>Login</span>
-                </NavLink>
-                <NavLink
-                  to="/guest/signup"
-                  className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
-                >
-                  <ArrowLeftOnRectangleIcon width={20} />
-                  <span>Signup</span>
-                </NavLink>
-              </>
-            )}
-            {token && (
-              <NavLink
-                to="/logout"
-                className="inline-flex text-gray-900 items-center gap-2 transition-all duration-150 ease-out hover:text-red-500"
-              >
-                <ArrowRightOnRectangleIcon width={20} />
-                <span>Logout</span>
-              </NavLink>
-            )}
-          </div>
 
           <div className="md:hidden">
             <div>
@@ -152,15 +130,7 @@ const Header = () => {
                       Questions
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink
-                      to="/popular"
-                      className="text-gray-900 transition-all duration-150 ease-out hover:text-red-500"
-                      onClick={() => setShowNav(false)}
-                    >
-                      Popular
-                    </NavLink>
-                  </li>
+                  <li></li>
                   {token && (
                     <>
                       <li>

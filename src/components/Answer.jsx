@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import EditAnswerForm from "./EditAnswerForm";
 import axiosClient from "../axiosClient";
 
-const Answer = ({ answer }) => {
+const Answer = ({ answer, action }) => {
   const { user } = useAuthContext();
   const divRef = useRef();
   const [show, setShow] = useState(false);
@@ -29,7 +29,7 @@ const Answer = ({ answer }) => {
     try {
       const { data } = await axiosClient.delete("/answers/" + answer.id);
       if (data) {
-        window.location.reload();
+        action();
       }
     } catch (e) {
       alert("Error deleting");
@@ -43,6 +43,7 @@ const Answer = ({ answer }) => {
           id={answer.id}
           onShow={() => setShow(false)}
           text={answer.body}
+          action={action}
         />
       )}
       <div className="p-4 bg-white rounded-lg shadow-sm">

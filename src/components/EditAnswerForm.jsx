@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useRef, useState } from "react";
 import axiosClient from "../axiosClient";
 
-const EditAnswerForm = ({ id, onShow, text }) => {
+const EditAnswerForm = ({ id, onShow, text, action }) => {
   const textareaRef = useRef();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
@@ -20,7 +20,7 @@ const EditAnswerForm = ({ id, onShow, text }) => {
       const { data } = await axiosClient.patch("/answers/" + id, payload);
       setLoading(false);
       onShow();
-      window.location.reload();
+      action();
     } catch (error) {
       const response = error.response;
       if (response && response.status === 422) {
